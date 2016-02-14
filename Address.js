@@ -1,7 +1,7 @@
 /**
  * Address
  * 
- * @package com.magadanski.core
+ * @namespace core
  * @author Georgi Popov
  * @version 1.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
@@ -30,6 +30,10 @@ define('com.magadanski.core.Address', function () {
 	/**
 	 * A helper class for working with browser history and push state. This should be used for deep linking.
 	 * 
+	 * @class Address
+	 * @constructor
+	 * @since  1.0
+	 * @extends {core.EventDispatcher}
 	 * @param {string} aRoot The path to the main script on the server. Defult value is root: '/'.
 	 */
 	var Address = function (aRoot) {
@@ -44,6 +48,7 @@ define('com.magadanski.core.Address', function () {
 		/**
 		 * Returns the current URL hash
 		 * 
+		 * @method getHash
 		 * @return {string} The URL hash
 		 */
 		that.getHash = function () {
@@ -53,6 +58,7 @@ define('com.magadanski.core.Address', function () {
 		/**
 		 * Sets the URL hash
 		 * 
+		 * @method setHash
 		 * @param {string} hash The new value that would be set for the hash
 		 * @param {string} title The title argument to be passed to the history.pushstate function. As of February 8th, 2016 this is still simply ignored by all browsers.
 		 * @param {object} state An object storing additional information for the state itself
@@ -72,6 +78,7 @@ define('com.magadanski.core.Address', function () {
 		/**
 		 * Returns the state object for the current history state
 		 * 
+		 * @method getState
 		 * @return {object} The state object
 		 */
 		that.getState = function () {

@@ -1,7 +1,7 @@
 /**
  * Event Dispatcher base class
  * 
- * @package com.magadanski.core
+ * @namespace core
  * @author Georgi Popov
  * @version 1.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
@@ -17,6 +17,10 @@ define('com.magadanski.core.EventDispatcher', function () {
 	
 	/**
 	 * Core EventDispatcher class that should be extended in case you need ability to fire custom events from an object
+	 * 
+	 * @class EventDispatcher
+	 * @constructor
+	 * @since 1.0
 	 */
 	var EventDispatcher = function () {
 		that = this;
@@ -34,6 +38,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	/**
 	 * Attaches an event handler to a specific event type
 	 * 
+	 * @method addEventListener
 	 * @param {string} eventType The type of the event you'd like to listen for
 	 * @param {function(event:Event)} callback The function to be executed when the event occurs
 	 * @return {void}
@@ -61,6 +66,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	/**
 	 * Removes a previously attached event to a specific event type.
 	 * 
+	 * @method removeEventListener
 	 * @param  {string} eventType The type of the event you'd like to unbind a handler for
 	 * @param  {function(event:Event)} callback This must be a reference to the same Function object that has been set as a listener. Otherwise the removal will not take place.
 	 * @return {void}
@@ -96,6 +102,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	/**
 	 * Fires an event on behalf of the object
 	 * 
+	 * @method dispatchEvent
 	 * @param  {string} eventType The type of the event you'd like to fire
 	 * @param  {Event} eventObj The actual event object that will be passed to listener functions. This can be used to store additional information for the situation.
 	 * @return {void}

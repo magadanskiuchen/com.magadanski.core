@@ -1,7 +1,7 @@
 /**
  * DOMCollection
  * 
- * @package com.magadanski.core
+ * @namespace core
  * @author Georgi Popov
  * @version 1.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
@@ -18,6 +18,11 @@ define('com.magadanski.core.DOMCollection', function () {
 	// private methods
 	
 	/**
+	 * Wrapper that holds a collection of DOM elements and allows for easy group modifications to each of them
+	 * 
+	 * @class DOMCollection
+	 * @constructor
+	 * @since 1.0
 	 * @param {string} selector A CSS selector to be used to fetch elements
 	 * @param {?DOMNode} context The context in which the CSS selector will be used. If empty then document will be used a context. If some DOMNode element is passed, the collection will load only elements within that context that match the selector
 	 */
@@ -27,6 +32,8 @@ define('com.magadanski.core.DOMCollection', function () {
 		// priviledged properties
 		/**
 		 * A list of the DOMNode elements that fall within the collection
+		 * 
+		 * @property elements
 		 * @type {Array}
 		 */
 		that.elements = [];
@@ -62,6 +69,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Adds event listener to all DOMNode elements within the collection
 	 * 
+	 * @method addEventListener
 	 * @param {eventType} eventType The type of the event to listen for
 	 * @param {function(event:Event)} callback The function to be executed when the event occurs
 	 * @return {void}
@@ -75,6 +83,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Remved a previously assigned event listener to all of the elements from the collection. The same reference to the callback function must be provided, otherwise the method will not work.
 	 * 
+	 * @method removeEventListener
 	 * @param  {string} eventType The type of the event to remove listener for
 	 * @param  {function(event:Event)} callback The function to be removed as handler
 	 * @return {void}
@@ -88,6 +97,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Adds a CSS class to all elements from the collection
 	 * 
+	 * @method addClass
 	 * @param {string} className The CSS class to be applied
 	 * @return {void}
 	 */
@@ -100,6 +110,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Removes a CSS class from all elements from the collection
 	 * 
+	 * @method removeClass
 	 * @param  {string} className The CSS class to be removed
 	 * @return {void}
 	 */
@@ -112,6 +123,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Executes a function for all elements from the collection
 	 * 
+	 * @method each
 	 * @param  {function(element:DOMElement, i:int)} callback The function to be executed for each of the elements
 	 * @return {void}
 	 */
@@ -124,6 +136,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Applies CSS styles to all elements from the collection
 	 * 
+	 * @method css
 	 * @param  {object} styles An object representation of the CSS styles to be applied to the elements from the collection
 	 * @return {void}
 	 */
@@ -138,6 +151,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Filters elements from the collection, so only ones that meet a provided CSS selector remain
 	 * 
+	 * @method filter
 	 * @param  {string} selector CSS selector to test the elements against
 	 * @return {DOMCollection}
 	 */
@@ -156,6 +170,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Finds child elements to the ones from the collection that match a specific CSS selector
 	 * 
+	 * @method find
 	 * @param  {string} selector CSS selector to describe desired child elements
 	 * @return {DOMCollection}
 	 */
@@ -172,6 +187,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	
 	/**
 	 * Detaches from the DOM all elements from the collection
+	 * 
+	 * @method remove
 	 * @return {void}
 	 */
 	DOMCollection.prototype.remove = function () {

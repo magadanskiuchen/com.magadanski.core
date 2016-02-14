@@ -1,7 +1,7 @@
 /**
  * Exception base class
  * 
- * @package com.magadanski.exceptions
+ * @namespace exceptions
  * @author Georgi Popov
  * @version 1.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
@@ -18,6 +18,9 @@ define('com.magadanski.exceptions.Exception', function () {
 	/**
 	 * An exception object
 	 * 
+	 * @class Exception
+	 * @constructor
+	 * @since  1.0
 	 * @param {string} message The message of the exception
 	 * @return {void}
 	 */

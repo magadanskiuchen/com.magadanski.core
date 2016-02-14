@@ -1,7 +1,7 @@
 /**
  * Type Exception
  * 
- * @package com.magadanski.exceptions
+ * @namespace exceptions
  * @author Georgi Popov
  * @version 1.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
@@ -19,6 +19,10 @@ define('com.magadanski.exceptions.TypeException', function () {
 	/**
 	 * An exception in case a type mismatch for arguments has occurred
 	 * 
+	 * @class TypeException
+	 * @constructor
+	 * @since 1.0
+	 * @extends {exceptions.Exception}
 	 * @param {string} message The message for the exception
 	 */
 	var TypeException = function (message) {

@@ -1,7 +1,7 @@
 /**
  * App
  * 
- * @package com.magadanski.core
+ * @namespace core
  * @author Georgi Popov
  * @version 1.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
@@ -18,6 +18,11 @@ define('com.magadanski.core.App', function () {
 	
 	/**
 	 * Core app class firing two events as the site loads. An `init` event id fired on document.DOMContentLoaded and a `load` event is fired on window.load
+	 * 
+	 * @class App
+	 * @constructor
+	 * @since 1.0
+	 * @extends {core.EventDispatcher}
 	 */
 	var App = function () {
 		that = this;
@@ -26,6 +31,7 @@ define('com.magadanski.core.App', function () {
 		/**
 		 * The application's name/title, which will originally pulls from the browser's title
 		 * 
+		 * @property title
 		 * @type {string}
 		 */
 		that.title = document.title;
