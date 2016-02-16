@@ -4,7 +4,7 @@
  * @module com.magadanski.core
  * @namespace core
  * @author Georgi Popov
- * @version 1.0
+ * @version 1.0.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
  */
 
@@ -12,7 +12,7 @@
  * A function to automatically create (is not already defined) an object with all necessary properties to represent a package in a revrese domain notation
  * 
  * @static
- * @since  1.0
+ * @since  1.0.0
  * @param  {string} struct A reverse domain notation of the package you'd like to create
  * @return {object} The object in the end of the packge you've efined
  */
@@ -34,7 +34,7 @@ function pack(struct) {
  * A wrapper function to create a package and define a class within it.
  * 
  * @static
- * @since  1.0
+ * @since  1.0.0
  * @param  {string} struct A reverse domain notation of the package you'd like to create along with a class name
  * @param  {function} declaration A function that would be executed as soon as the package variable is created and should declare a class for the package.
  * @return {void}
@@ -48,7 +48,7 @@ function define(struct, declaration) {
  * A function to load a package, class or a property of a reverse domain notated instance and bring it as a global root variable or return it as a result
  * 
  * @static
- * @since  1.0
+ * @since  1.0.0
  * @param  {string} struct The reverse domain notation of the package, class or property you'd like to have as global
  * @param  {bool} local Whether you'd like to make this as a global variable or you'd like the result returned to you to assign to a local variable
  * @return {void|object} Would not return anything of `local` is false. If the second function parameter is `true` then this would return the object rather than making it global.

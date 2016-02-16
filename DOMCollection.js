@@ -3,7 +3,7 @@
  * 
  * @namespace core
  * @author Georgi Popov
- * @version 1.0
+ * @version 1.0.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
  * @uses com/magadanski/core/core.js
  */
@@ -22,7 +22,7 @@ define('com.magadanski.core.DOMCollection', function () {
 	 * 
 	 * @class DOMCollection
 	 * @constructor
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @param {string} selector A CSS selector to be used to fetch elements
 	 * @param {?DOMNode} context The context in which the CSS selector will be used. If empty then document will be used a context. If some DOMNode element is passed, the collection will load only elements within that context that match the selector
 	 */

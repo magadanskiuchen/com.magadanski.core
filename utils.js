@@ -4,7 +4,7 @@
  * @module com.magadanski.utils
  * @namespace core
  * @author Georgi Popov
- * @version 1.0
+ * @version 1.0.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
  * @uses com/magadanski/core/core.js
  */
@@ -15,7 +15,7 @@ pack('com.magadanski.utils');
  * A helper function to calculate the full height of a DOMNode element (including margin)
  * 
  * @static
- * @since  1.0
+ * @since  1.0.0
  * @param  {DOMNode} el The DOMNode you'd like to get the height of
  * @return {int} The height of the element in pixels
  */
@@ -37,7 +37,7 @@ com.magadanski.utils.getFullHeight = function (el) {
  * A helper function to extend the properties of a configuration object with additional defaul values
  * 
  * @static
- * @since  1.0
+ * @since  1.0.0
  * @param  {object} defaults The default values for the options
  * @param  {object} options The options passed by the developer
  * @return {object} The options object extended with additional default properties that were not passed by the developer

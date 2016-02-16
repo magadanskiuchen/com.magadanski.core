@@ -3,7 +3,7 @@
  * 
  * @namespace core
  * @author Georgi Popov
- * @version 1.0
+ * @version 1.0.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
  * @uses com/magadanski/core/core.js
  * @uses com/magadanski/core/EventDispatcher.js
@@ -32,7 +32,7 @@ define('com.magadanski.core.Address', function () {
 	 * 
 	 * @class Address
 	 * @constructor
-	 * @since  1.0
+	 * @since  1.0.0
 	 * @extends {core.EventDispatcher}
 	 * @param {string} aRoot The path to the main script on the server. Defult value is root: '/'.
 	 */

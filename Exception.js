@@ -3,7 +3,7 @@
  * 
  * @namespace exceptions
  * @author Georgi Popov
- * @version 1.0
+ * @version 1.0.0
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GPLv2
  * @uses com/magadanski/core/core.js
  */
@@ -20,7 +20,7 @@ define('com.magadanski.exceptions.Exception', function () {
 	 * 
 	 * @class Exception
 	 * @constructor
-	 * @since  1.0
+	 * @since  1.0.0
 	 * @param {string} message The message of the exception
 	 * @return {void}
 	 */
