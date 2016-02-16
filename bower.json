@@ -1,0 +1,16 @@
+{
+  "name": "com.magadanski.core",
+  "authors": [
+    "Georgi Popov <magadanski.uchen@gmail.com>"
+  ],
+  "description": "Core framework files for com.magadanski",
+  "main": "core.js",
+  "moduleType": [],
+  "keywords": [
+    "core",
+    "magadanski",
+    "framework"
+  ],
+  "license": "GPLv3",
+  "homepage": "https://github.com/magadanskiuchen/com.magadanski.core"
+}
