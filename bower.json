@@ -16,7 +16,12 @@
   "license": "GPLv3",
   "homepage": "https://github.com/magadanskiuchen/com.magadanski.core",
   "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
     "*.json",
     "*.md"
-  ]
+  ],
 }
