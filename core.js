@@ -9,7 +9,7 @@
  */
 
 /**
- * A function to automatically create (is not already defined) an object with all necessary properties to represent a package in a revrese domain notation
+ * A function to automatically create (if not already defined) an object with all necessary properties to represent a package in a revrese domain notation
  * 
  * @static
  * @since  1.0.0
