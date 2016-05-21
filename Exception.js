@@ -19,7 +19,6 @@ define('com.magadanski.exceptions.Exception', function () {
 	 * An exception object
 	 * 
 	 * @class Exception
-	 * @constructor
 	 * @since  1.0.0
 	 * @param {string} message The message of the exception
 	 * @return {void}

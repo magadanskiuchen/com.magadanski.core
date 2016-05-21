@@ -20,7 +20,6 @@ define('com.magadanski.core.App', function () {
 	 * Core app class firing two events as the site loads. An `init` event id fired on document.DOMContentLoaded and a `load` event is fired on window.load
 	 * 
 	 * @class App
-	 * @constructor
 	 * @since 1.0.0
 	 * @extends {core.EventDispatcher}
 	 */
@@ -32,6 +31,7 @@ define('com.magadanski.core.App', function () {
 		 * The application's name/title, which will originally pulls from the browser's title
 		 * 
 		 * @property title
+		 * @memberof App
 		 * @type {string}
 		 */
 		that.title = document.title;

@@ -20,7 +20,6 @@ define('com.magadanski.exceptions.TypeException', function () {
 	 * An exception in case a type mismatch for arguments has occurred
 	 * 
 	 * @class TypeException
-	 * @constructor
 	 * @since 1.0.0
 	 * @extends {exceptions.Exception}
 	 * @param {string} message The message for the exception
