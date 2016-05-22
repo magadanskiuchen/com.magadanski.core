@@ -57,3 +57,7 @@ It only provides methods for manipulating those, including looping through all e
 The framework includes a generic wrapper class for usage of exceptions -- `Exception`.
 
 This is also extended as `TypeException`, which is triggered by some framework classes when argument type mismatch occurs.
+
+### Language Reference
+
+For more information on this and other packages of the JS framework please refer to the [com.magadanski JS Framework Language Reference](http://magadanskiuchen.github.io/com.magadanski.core/)
