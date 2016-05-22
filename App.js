@@ -22,6 +22,8 @@ define('com.magadanski.core.App', function () {
 	 * @class App
 	 * @since 1.0.0
 	 * @extends {EventDispatcher}
+	 * @fires {@link App#init|init}
+	 * @fires {@link App#load|load}
 	 */
 	var App = function () {
 		that = this;
@@ -45,6 +47,14 @@ define('com.magadanski.core.App', function () {
 			customEvent.originalEvent = e;
 			customEvent.currentTarget = that;
 			
+			/**
+			 * Alias for the `document`'s `DOMContentLoaded` event
+			 * 
+			 * @event App#init
+			 * @type {Object}
+			 * @property {Event} originalEvent The actual DOMContentLoaded event
+			 * @property {Object} currentTarget The App instance triggering the event
+			 */
 			that.dispatchEvent('init', customEvent);
 		});
 		
@@ -53,6 +63,14 @@ define('com.magadanski.core.App', function () {
 			customEvent.originalEvent = e;
 			customEvent.currentTarget = that;
 			
+			/**
+			 * Alias for `window.load`
+			 * 
+			 * @event App#load
+			 * @type {Object}
+			 * @property {Event} originalEvent The actual DOMContentLoaded event
+			 * @property {Object} currentTarget The App instance triggering the event
+			 */
 			that.dispatchEvent('load', customEvent);
 		});
 		

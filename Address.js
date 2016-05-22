@@ -21,8 +21,7 @@ define('com.magadanski.core.Address', function () {
 	 * In case the application is, however, in some subdirectory you'll need to overwrite this by passing an `aRoot` argument to the class constructor.
 	 * 
 	 * @access private
-	 * @instance
-	 * @property addressRoot
+	 * @inner
 	 * @memberOf Address
 	 * @type {string}
 	 * @see Address
@@ -43,8 +42,7 @@ define('com.magadanski.core.Address', function () {
 	 * There is a `getHash()` getter and a `setHath()` setter to allow you to control the property.
 	 * 
 	 * @access private
-	 * @instance
-	 * @property hash
+	 * @inner
 	 * @memberOf Address
 	 * @type {string}
 	 * @see {@link Address#getHash|getHash}
@@ -60,9 +58,8 @@ define('com.magadanski.core.Address', function () {
 	 * You cannot directly set the value of `state` without calling `setHash()` but you can retrieve it with the `getState()` getter.
 	 * 
 	 * @access private
-	 * @instance
+	 * @inner
 	 * @readonly
-	 * @property state
 	 * @memberOf Address
 	 * @type {string}
 	 * @see {@link Address#getState|getState}
@@ -74,7 +71,7 @@ define('com.magadanski.core.Address', function () {
 	 * Auto handler of the `window.popstate` event
 	 * 
 	 * @access private
-	 * @instance
+	 * @inner
 	 * @memberOf Address
 	 * @param  {Event} e The `popstate` event
 	 * @return {void}
@@ -88,10 +85,10 @@ define('com.magadanski.core.Address', function () {
 	 * Stores the current hash as a property each time `setHash()` is called.
 	 * 
 	 * @access private
-	 * @instance
+	 * @inner
 	 * @memberOf Address
 	 * @return {void}
-	 * @see {@link Address#hash|hash}
+	 * @see {@link Address~hash|hash}
 	 * @see {@link Address#setHash|setHash}
 	 */
 	function updateHash() {
@@ -116,14 +113,14 @@ define('com.magadanski.core.Address', function () {
 		
 		// priviledged methods
 		/**
-		 * Returns the current URL hash
+		 * Getter for {@link Address~hash|hash}
 		 * 
 		 * @access public
 		 * @instance
 		 * @method getHash
 		 * @memberof Address
 		 * @return {string} The URL hash
-		 * @see {@link Address#hash|hash}
+		 * @see {@link Address~hash|hash}
 		 * @see {@link Address#setHash|setHash}
 		 */
 		that.getHash = function () {
@@ -131,7 +128,9 @@ define('com.magadanski.core.Address', function () {
 		}
 		
 		/**
-		 * Sets the URL hash
+		 * Sets the URL hash, the title and allows for a custom state to be saved.
+		 * 
+		 * This is an alias for `history.pushState` that also performs some internal class handling and event triggering.
 		 * 
 		 * @access public
 		 * @instance
@@ -140,7 +139,7 @@ define('com.magadanski.core.Address', function () {
 		 * @param {string} hash The new value that would be set for the hash
 		 * @param {string} title The title argument to be passed to the history.pushstate function. As of February 8th, 2016 this is still simply ignored by all browsers.
 		 * @param {object} state An object storing additional information for the state itself
-		 * @see {@link Address#hash|hash}
+		 * @see {@link Address~hash|hash}
 		 * @see {@link Address#getHash|getHash}
 		 */
 		that.setHash = function (hash, title, state) {
@@ -156,14 +155,14 @@ define('com.magadanski.core.Address', function () {
 		}
 		
 		/**
-		 * Returns the state object for the current history state
+		 * Getter for {@link Address~state|state}
 		 * 
 		 * @access public
 		 * @instance
 		 * @method getState
 		 * @memberof Address
 		 * @return {object} The state object
-		 * @see {@link Address#state|state}
+		 * @see {@link Address#state~state}
 		 * @see {@link Address#setHash|setHash}
 		 */
 		that.getState = function () {

@@ -25,6 +25,15 @@ define('com.magadanski.core.EventDispatcher', function () {
 		that = this;
 		
 		// priviledged properties
+		/**
+		 * Object storing all event types.
+		 * 
+		 * Each type is an array of callback functions that get executed when an event of that type of dispatched.
+		 * 
+		 * @access public
+		 * @instance
+		 * @type {Object}
+		 */
 		that.events = {};
 		
 		// priviledged methods
@@ -38,6 +47,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	 * Attaches an event handler to a specific event type
 	 * 
 	 * @access public
+	 * @instance
 	 * @method addEventListener
 	 * @memberof EventDispatcher
 	 * @param {string} eventType The type of the event you'd like to listen for
@@ -68,6 +78,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	 * Removes a previously attached event to a specific event type.
 	 * 
 	 * @access public
+	 * @instance
 	 * @method removeEventListener
 	 * @memberof EventDispatcher
 	 * @param  {string} eventType The type of the event you'd like to unbind a handler for
@@ -106,6 +117,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	 * Fires an event on behalf of the object
 	 * 
 	 * @access public
+	 * @instance
 	 * @method dispatchEvent
 	 * @memberof EventDispatcher
 	 * @param  {string} eventType The type of the event you'd like to fire
