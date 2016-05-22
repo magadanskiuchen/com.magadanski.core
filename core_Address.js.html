@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: core/Address.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: core/Address.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Address
+ * 
+ * @namespace core
+ * @author Georgi Popov
+ * @version 1.0.0
+ * @license http://www.gnu.org/licenses/gpl-3.0.en.html GPLv3
+ * @requires com/magadanski/core/core.js
+ * @requires com/magadanski/core/EventDispatcher.js
+ */
+
+define('com.magadanski.core.Address', function () {
+	var that;
+	
+	// private properties
+	/**
+	 * Root-relative address to the homepage
+	 * 
+	 * This variable holds the path to the root of the application. In case it's in the root of the domain the default value of '/' will be used.
+	 * 
+	 * In case the application is, however, in some subdirectory you'll need to overwrite this by passing an `aRoot` argument to the class constructor.
+	 * 
+	 * @access private
+	 * @inner
+	 * @memberOf Address
+	 * @type {string}
+	 * @see Address
+	 */
+	var addressRoot = '/';
+	
+	/**
+	 * Copy of deep-linked address
+	 * 
+	 * The property is not to be mistaken with the `window.location.hash` object (although it can contain it).
+	 * This will not always appear with "#" but can also be set as any path.
+	 * 
+	 * If you use `setHath('#hash')` this will essentially match the `window.location.hash` yet you can ommit the "#" symbol
+	 * when calling the method.
+	 * 
+	 * It gets updated through the `updateHash()` private method each time a `setHash()` call occurs.
+	 * 
+	 * There is a `getHash()` getter and a `setHath()` setter to allow you to control the property.
+	 * 
+	 * @access private
+	 * @inner
+	 * @memberOf Address
+	 * @type {string}
+	 * @see {@link Address#getHash|getHash}
+	 * @see {@link Address#setHash|setHash}
+	 */
+	var hash = '';
+	
+	/**
+	 * Holder of a state property for HTML5 `history.pushState()`
+	 * 
+	 * This will be updated when the `setHash()` method is used.
+	 * 
+	 * You cannot directly set the value of `state` without calling `setHash()` but you can retrieve it with the `getState()` getter.
+	 * 
+	 * @access private
+	 * @inner
+	 * @readonly
+	 * @memberOf Address
+	 * @type {string}
+	 * @see {@link Address#getState|getState}
+	 */
+	var state = '';
+	
+	// private methods
+	/**
+	 * Auto handler of the `window.popstate` event
+	 * 
+	 * @access private
+	 * @inner
+	 * @memberOf Address
+	 * @param  {Event} e The `popstate` event
+	 * @return {void}
+	 */
+	function popStateHandler(e) {
+		updateHash();
+		state = e.state;
+	}
+	
+	/**
+	 * Stores the current hash as a property each time `setHash()` is called.
+	 * 
+	 * @access private
+	 * @inner
+	 * @memberOf Address
+	 * @return {void}
+	 * @see {@link Address~hash|hash}
+	 * @see {@link Address#setHash|setHash}
+	 */
+	function updateHash() {
+		hash = '/' + window.location.pathname.replace(addressRoot, '').replace(/^\//, '');
+	}
+	
+	/**
+	 * A helper class for working with browser history and push state. This should be used for deep linking.
+	 * 
+	 * @class Address
+	 * @since  1.0.0
+	 * @extends {EventDispatcher}
+	 * @param {string} aRoot The path to the main script on the server. Defult value is root: '/'.
+	 */
+	var Address = function (aRoot) {
+		that = this;
+		if (typeof(aRoot) === 'string') {
+			addressRoot = aRoot;
+		}
+		
+		// priviledged properties
+		
+		// priviledged methods
+		/**
+		 * Getter for {@link Address~hash|hash}
+		 * 
+		 * @access public
+		 * @instance
+		 * @method getHash
+		 * @memberof Address
+		 * @return {string} The URL hash
+		 * @see {@link Address~hash|hash}
+		 * @see {@link Address#setHash|setHash}
+		 */
+		that.getHash = function () {
+			return hash;
+		}
+		
+		/**
+		 * Sets the URL hash, the title and allows for a custom state to be saved.
+		 * 
+		 * This is an alias for `history.pushState` that also performs some internal class handling and event triggering.
+		 * 
+		 * @access public
+		 * @instance
+		 * @method setHash
+		 * @memberof Address
+		 * @param {string} hash The new value that would be set for the hash
+		 * @param {string} title The title argument to be passed to the history.pushstate function. As of February 8th, 2016 this is still simply ignored by all browsers.
+		 * @param {object} state An object storing additional information for the state itself
+		 * @see {@link Address~hash|hash}
+		 * @see {@link Address#getHash|getHash}
+		 */
+		that.setHash = function (hash, title, state) {
+			var old = { hash: that.getHash(), state: that.getState() };
+			
+			if (old.hash != hash) {
+				history.pushState(title, state, hash);
+				updateHash();
+				
+				window.dispatchEvent(new PopStateEvent('popstate', { state: state }));
+				that.dispatchEvent('change', { previousHash: old.hash, previousState: old.state });
+			}
+		}
+		
+		/**
+		 * Getter for {@link Address~state|state}
+		 * 
+		 * @access public
+		 * @instance
+		 * @method getState
+		 * @memberof Address
+		 * @return {object} The state object
+		 * @see {@link Address#state~state}
+		 * @see {@link Address#setHash|setHash}
+		 */
+		that.getState = function () {
+			return state;
+		}
+		
+		// constructor
+		window.addEventListener('popstate', popStateHandler);
+	}
+	Address.inherits(com.magadanski.core.EventDispatcher);
+	com.magadanski.core.Address = Address;
+	
+	// public methods
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Address.html">Address</a></li><li><a href="App.html">App</a></li><li><a href="Connect.html">Connect</a></li><li><a href="DOMCollection.html">DOMCollection</a></li><li><a href="EventDispatcher.html">EventDispatcher</a></li><li><a href="Exception.html">Exception</a></li><li><a href="TypeException.html">TypeException</a></li></ul><h3>Events</h3><ul><li><a href="App.html#event:init">init</a></li><li><a href="App.html#event:load">load</a></li></ul><h3>Namespaces</h3><ul><li><a href="core.html">core</a></li><li><a href="exceptions.html">exceptions</a></li><li><a href="fb.html">fb</a></li></ul><h3>Global</h3><ul><li><a href="global.html#define">define</a></li><li><a href="global.html#inc">inc</a></li><li><a href="global.html#pack">pack</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 22 2016 12:13:43 GMT+0300 (EEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: EventDispatcher.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: EventDispatcher.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Event Dispatcher base class
+ * 
+ * @namespace core
+ * @author Georgi Popov
+ * @version 1.0.0
+ * @license http://www.gnu.org/licenses/gpl-3.0.en.html GPLv3
+ * @requires com/magadanski/core/core.js
+ */
+
+define('com.magadanski.core.EventDispatcher', function () {
+	var that;
+	
+	// private properties
+	
+	// private methods
+	
+	/**
+	 * Core EventDispatcher class that should be extended in case you need ability to fire custom events from an object
+	 * 
+	 * @class EventDispatcher
+	 * @since 1.0.0
+	 */
+	var EventDispatcher = function () {
+		that = this;
+		
+		// priviledged properties
+		/**
+		 * Object storing all event types.
+		 * 
+		 * Each type is an array of callback functions that get executed when an event of that type of dispatched.
+		 * 
+		 * @access public
+		 * @instance
+		 * @type {Object}
+		 */
+		that.events = {};
+		
+		// priviledged methods
+		
+		// constructor
+	}
+	com.magadanski.core.EventDispatcher = EventDispatcher;
+	
+	// public methods
+	/**
+	 * Attaches an event handler to a specific event type
+	 * 
+	 * @access public
+	 * @instance
+	 * @method addEventListener
+	 * @memberof EventDispatcher
+	 * @param {string} eventType The type of the event you'd like to listen for
+	 * @param {function(event:Event)} callback The function to be executed when the event occurs
+	 * @return {void}
+	 */
+	EventDispatcher.prototype.addEventListener = function (eventType, callback) {
+		var that = this;
+		
+		if (typeof(eventType.split) != 'undefined') {
+			eventType = eventType.split(/[\s\,]/);
+		}
+		
+		for (var e in eventType) {
+			var eventName = eventType[e];
+			
+			if (eventName.length > 1) {
+				if (typeof(that.events[eventName]) == 'undefined') {
+					that.events[eventName] = [];
+				}
+				
+				that.events[eventName].push(callback);
+			}
+		}
+	}
+	
+	/**
+	 * Removes a previously attached event to a specific event type.
+	 * 
+	 * @access public
+	 * @instance
+	 * @method removeEventListener
+	 * @memberof EventDispatcher
+	 * @param  {string} eventType The type of the event you'd like to unbind a handler for
+	 * @param  {function(event:Event)} callback This must be a reference to the same Function object that has been set as a listener. Otherwise the removal will not take place.
+	 * @return {void}
+	 */
+	EventDispatcher.prototype.removeEventListener = function (eventType, callback) {
+		var that = this;
+		
+		if (typeof(eventType.split) != 'undefined') {
+			eventType = eventType.split(',');
+		}
+		
+		for (var e in eventType) {
+			var eventName = eventType[e].replace(/\s/, '');
+			
+			if (typeof(that.events[eventName]) != 'undedined') {
+				for (var c in that.events[eventName]) {
+					var shouldCallbackBeRemoved = false;
+					
+					if (typeof(callback) !== 'Function') {
+						shouldCallbackBeRemoved = true;
+					} else if (c == callback || that.events[eventName][c] == callback) {
+						shouldCallbackBeRemoved = true;
+					}
+					
+					if (shouldCallbackBeRemoved) {
+						that.events[eventName].splice(c, 1);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Fires an event on behalf of the object
+	 * 
+	 * @access public
+	 * @instance
+	 * @method dispatchEvent
+	 * @memberof EventDispatcher
+	 * @param  {string} eventType The type of the event you'd like to fire
+	 * @param  {Event} eventObj The actual event object that will be passed to listener functions. This can be used to store additional information for the situation.
+	 * @return {void}
+	 */
+	EventDispatcher.prototype.dispatchEvent = function (eventType, eventObj) {
+		var that = this;
+		
+		if (typeof(eventObj) == 'undefined') {
+			eventObj = {}; // TODO: check options to migrate to native JS event objects
+		}
+		
+		if (typeof(that.events[eventType]) == 'object') {
+			for (var callback in that.events[eventType]) {
+				eventObj.type = eventType;
+				eventObj.currentTarget = this;
+				
+				if (typeof(that.events[eventType][callback]) == 'function') {
+					that.events[eventType][callback](eventObj);
+				}
+			}
+		}
+	}
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Address.html">Address</a></li><li><a href="App.html">App</a></li><li><a href="DOMCollection.html">DOMCollection</a></li><li><a href="EventDispatcher.html">EventDispatcher</a></li><li><a href="Exception.html">Exception</a></li><li><a href="TypeException.html">TypeException</a></li></ul><h3>Events</h3><ul><li><a href="App.html#event:init">init</a></li><li><a href="App.html#event:load">load</a></li></ul><h3>Namespaces</h3><ul><li><a href="core.html">core</a></li><li><a href="exceptions.html">exceptions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#define">define</a></li><li><a href="global.html#inc">inc</a></li><li><a href="global.html#pack">pack</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 22 2016 12:02:56 GMT+0300 (EEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
