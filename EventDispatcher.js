@@ -5,7 +5,7 @@
  * @author Georgi Popov
  * @version 1.0.0
  * @license http://www.gnu.org/licenses/gpl-3.0.en.html GPLv3
- * @uses com/magadanski/core/core.js
+ * @requires com/magadanski/core/core.js
  */
 
 define('com.magadanski.core.EventDispatcher', function () {
@@ -37,6 +37,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	/**
 	 * Attaches an event handler to a specific event type
 	 * 
+	 * @access public
 	 * @method addEventListener
 	 * @memberof EventDispatcher
 	 * @param {string} eventType The type of the event you'd like to listen for
@@ -66,6 +67,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	/**
 	 * Removes a previously attached event to a specific event type.
 	 * 
+	 * @access public
 	 * @method removeEventListener
 	 * @memberof EventDispatcher
 	 * @param  {string} eventType The type of the event you'd like to unbind a handler for
@@ -103,6 +105,7 @@ define('com.magadanski.core.EventDispatcher', function () {
 	/**
 	 * Fires an event on behalf of the object
 	 * 
+	 * @access public
 	 * @method dispatchEvent
 	 * @memberof EventDispatcher
 	 * @param  {string} eventType The type of the event you'd like to fire

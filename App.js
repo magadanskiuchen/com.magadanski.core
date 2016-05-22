@@ -5,8 +5,8 @@
  * @author Georgi Popov
  * @version 1.0.0
  * @license http://www.gnu.org/licenses/gpl-3.0.en.html GPLv3
- * @uses com/magadanski/core/core.js
- * @uses com/magadanski/core/EventDispatcher.js
+ * @requires com/magadanski/core/core.js
+ * @requires com/magadanski/core/EventDispatcher.js
  */
 
 define('com.magadanski.core.App', function () {
@@ -21,7 +21,7 @@ define('com.magadanski.core.App', function () {
 	 * 
 	 * @class App
 	 * @since 1.0.0
-	 * @extends {core.EventDispatcher}
+	 * @extends {EventDispatcher}
 	 */
 	var App = function () {
 		that = this;
@@ -30,6 +30,7 @@ define('com.magadanski.core.App', function () {
 		/**
 		 * The application's name/title, which will originally pulls from the browser's title
 		 * 
+		 * @access public
 		 * @property title
 		 * @memberof App
 		 * @type {string}

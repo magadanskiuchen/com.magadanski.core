@@ -6,7 +6,7 @@
  * @author Georgi Popov
  * @version 1.0.0
  * @license http://www.gnu.org/licenses/gpl-3.0.en.html GPLv3
- * @uses com/magadanski/core/core.js
+ * @requires com/magadanski/core/core.js
  */
 
 pack('com.magadanski.utils');
@@ -14,6 +14,7 @@ pack('com.magadanski.utils');
 /**
  * A helper function to calculate the full height of a DOMNode element (including margin)
  * 
+ * @access public
  * @static
  * @since  1.0.0
  * @param  {DOMNode} el The DOMNode you'd like to get the height of
@@ -36,6 +37,7 @@ com.magadanski.utils.getFullHeight = function (el) {
 /**
  * A helper function to extend the properties of a configuration object with additional defaul values
  * 
+ * @access public
  * @static
  * @since  1.0.0
  * @param  {object} defaults The default values for the options

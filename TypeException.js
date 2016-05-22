@@ -5,8 +5,8 @@
  * @author Georgi Popov
  * @version 1.0.0
  * @license http://www.gnu.org/licenses/gpl-3.0.en.html GPLv3
- * @uses com/magadanski/core/core.js
- * @uses com/magadanski/exceptions/Exception.js
+ * @requires com/magadanski/core/core.js
+ * @requires com/magadanski/exceptions/Exception.js
  */
 
 define('com.magadanski.exceptions.TypeException', function () {
