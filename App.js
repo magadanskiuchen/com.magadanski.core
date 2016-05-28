@@ -33,9 +33,10 @@ define('com.magadanski.core.App', function () {
 		 * The application's name/title, which will originally pulls from the browser's title
 		 * 
 		 * @access public
-		 * @property title
+		 * @instance
+		 * @member {string} title
 		 * @memberof App
-		 * @type {string}
+		 * @default document.title
 		 */
 		that.title = document.title;
 		

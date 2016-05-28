@@ -24,6 +24,7 @@ define('com.magadanski.core.Address', function () {
 	 * @inner
 	 * @memberOf Address
 	 * @type {string}
+	 * @default
 	 * @see Address
 	 */
 	var addressRoot = '/';
@@ -102,6 +103,7 @@ define('com.magadanski.core.Address', function () {
 	 * @since  1.0.0
 	 * @extends {EventDispatcher}
 	 * @param {string} aRoot The path to the main script on the server. Defult value is root: '/'.
+	 * @fires {@link Address#change|change}
 	 */
 	var Address = function (aRoot) {
 		that = this;
@@ -150,6 +152,16 @@ define('com.magadanski.core.Address', function () {
 				updateHash();
 				
 				window.dispatchEvent(new PopStateEvent('popstate', { state: state }));
+				/**
+				 * Event dispatched when the URL of the page changes.
+				 * 
+				 * This is accompanied by a native window.popstate event.
+				 * 
+				 * @event Address#change
+				 * @type {Object}
+				 * @property {string} previousHash The previous page {@link Address~hash|hash}
+				 * @property {Object} previousState The previous page {@link Address~state|state}
+				 */
 				that.dispatchEvent('change', { previousHash: old.hash, previousState: old.state });
 			}
 		}

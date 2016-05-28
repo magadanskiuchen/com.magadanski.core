@@ -28,11 +28,12 @@ define('com.magadanski.core.EventDispatcher', function () {
 		/**
 		 * Object storing all event types.
 		 * 
-		 * Each type is an array of callback functions that get executed when an event of that type of dispatched.
+		 * Each event type is an array of callback functions that get executed when an event of that type of dispatched.
 		 * 
 		 * @access public
 		 * @instance
-		 * @type {Object}
+		 * @member {Object} events
+		 * @memberOf EventDispatcher
 		 */
 		that.events = {};
 		

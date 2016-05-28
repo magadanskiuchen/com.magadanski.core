@@ -21,13 +21,22 @@ define('com.magadanski.exceptions.TypeException', function () {
 	 * 
 	 * @class TypeException
 	 * @since 1.0.0
-	 * @extends {exceptions.Exception}
+	 * @extends {Exception}
 	 * @param {string} message The message for the exception
+	 * @return {void}
 	 */
 	var TypeException = function (message) {
 		that = this;
 		
 		// priviledged properties
+		/**
+		 * The exception's message
+		 * 
+		 * @access public
+		 * @instance
+		 * @member {string} message
+		 * @memberOf Exception
+		 */
 		that.message = message; // TODO: ditch excess line when migrating to ECMAScript 2015 (ES6)
 		
 		// priviledged methods

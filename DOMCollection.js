@@ -32,9 +32,10 @@ define('com.magadanski.core.DOMCollection', function () {
 		/**
 		 * A list of the DOMNode elements that fall within the collection
 		 * 
-		 * @property elements
-		 * @memberof DOMCollection
-		 * @type {Array}
+		 * @access public
+		 * @instance
+		 * @member {Array} elements
+		 * @memberOf DOMCollection
 		 */
 		that.elements = [];
 		
@@ -69,6 +70,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Adds event listener to all DOMNode elements within the collection
 	 * 
+	 * @access public
+	 * @instance
 	 * @method addEventListener
 	 * @memberof DOMCollection
 	 * @param {eventType} eventType The type of the event to listen for
@@ -82,8 +85,10 @@ define('com.magadanski.core.DOMCollection', function () {
 	}
 	
 	/**
-	 * Remved a previously assigned event listener to all of the elements from the collection. The same reference to the callback function must be provided, otherwise the method will not work.
+	 * Remves a previously assigned event listener to all of the elements from the collection. The same reference to the callback function must be provided, otherwise the method will not work.
 	 * 
+	 * @access public
+	 * @instance
 	 * @method removeEventListener
 	 * @memberof DOMCollection
 	 * @param  {string} eventType The type of the event to remove listener for
@@ -99,6 +104,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Adds a CSS class to all elements from the collection
 	 * 
+	 * @access public
+	 * @instance
 	 * @method addClass
 	 * @memberof DOMCollection
 	 * @param {string} className The CSS class to be applied
@@ -113,6 +120,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Removes a CSS class from all elements from the collection
 	 * 
+	 * @access public
+	 * @instance
 	 * @method removeClass
 	 * @memberof DOMCollection
 	 * @param  {string} className The CSS class to be removed
@@ -127,6 +136,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Executes a function for all elements from the collection
 	 * 
+	 * @acces public
+	 * @instance
 	 * @method each
 	 * @memberof DOMCollection
 	 * @param  {function(element:DOMElement, i:int)} callback The function to be executed for each of the elements
@@ -141,6 +152,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Applies CSS styles to all elements from the collection
 	 * 
+	 * @access public
+	 * @instance
 	 * @method css
 	 * @memberof DOMCollection
 	 * @param  {object} styles An object representation of the CSS styles to be applied to the elements from the collection
@@ -157,6 +170,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Filters elements from the collection, so only ones that meet a provided CSS selector remain
 	 * 
+	 * @access public
+	 * @instance
 	 * @method filter
 	 * @memberof DOMCollection
 	 * @param  {string} selector CSS selector to test the elements against
@@ -177,6 +192,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Finds child elements to the ones from the collection that match a specific CSS selector
 	 * 
+	 * @access public
+	 * @instance
 	 * @method find
 	 * @memberof DOMCollection
 	 * @param  {string} selector CSS selector to describe desired child elements
@@ -196,6 +213,8 @@ define('com.magadanski.core.DOMCollection', function () {
 	/**
 	 * Detaches from the DOM all elements from the collection
 	 * 
+	 * @access public
+	 * @instance
 	 * @method remove
 	 * @memberof DOMCollection
 	 * @return {void}

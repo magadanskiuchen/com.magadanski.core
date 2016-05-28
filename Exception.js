@@ -27,6 +27,14 @@ define('com.magadanski.exceptions.Exception', function () {
 		that = this;
 		
 		// priviledged properties
+		/**
+		 * The exception's message
+		 * 
+		 * @access public
+		 * @instance
+		 * @member {string} message
+		 * @memberOf Exception
+		 */
 		that.message = message;
 		
 		// priviledged methods
