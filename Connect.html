@@ -48,6 +48,19 @@
 
 <div class="description">
     <p>Facebook login helper</p>
+<p>When instantiated the class automatically asynchronously loads the FB SDK.</p>
+<p>After the FB SDK is loaded and the DOMContentLoaded event fires the
+<code>init</code> method of the class. This method initializes the FB SDK, checks
+the current user's status (<code>connected</code>, <code>not_authorized</code> or <code>uknown</code>).</p>
+<p>Based on this status either the <code>login</code> or <code>logout</code> events are dispatched.
+The <code>login</code> event is dispatched if the status is <code>connected</code> and the
+<code>logout</code> one if one of the other two statuses is present.</p>
+<p>If the status of the user changes associated events are dispatched as well.
+The difference is that in such a follow-up status change if the user is now
+<code>not_authorized</code> then a <code>not_authorized</code> event will be dispatched, rather
+than the original <code>logout</code> one.</p>
+<p>Based on options set for &quot;login&quot; and &quot;logout&quot; buttons necessary functionality
+is assigned to those.</p>
 </div>
 
 
@@ -143,7 +156,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line163">line 163</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line205">line 205</a>
     </li></ul></dd>
     
 
@@ -157,6 +170,15 @@
 
 
 
+
+<h5>Fires:</h5>
+<ul>
+    <li><a href="Connect.html#event:login">login</a></li>
+
+    <li><a href="Connect.html#event:logout">logout</a></li>
+
+    <li><a href="Connect.html#event:not_authorized">not_authorized</a></li>
+</ul>
 
 
 
@@ -205,15 +227,60 @@
 
 <div class="description">
     <p>The default initialization options.</p>
-<p>Those options include <code>appId</code>, <code>xfbml</code>, <code>version</code>, <code>scope</code>, <code>loginButton</code>, <code>logoutButton</code>, <code>onConnected()</code>, <code>onLogout()</code> and <code>onNotAuthorized()</code>.
-The only required option is <code>appId</code>. If you do not pass that none of the functionality will get executed.</p>
-<p>The <code>xfbml</code> option is simply forwarded to FBs SDK, denoting whether XFBML tags on the page should be parsed. The default value us <code>true</code>.</p>
-<p>The <code>version</code> option is another option passed to FBs SDK. This denotes that your code would expect functionality for that version of the API. The default value is 'v2.6'</p>
-<p>You should pass a string with comma delimited permissions that your application needs as the <code>scope</code> option.</p>
-<p>Pass a CSS selector for the <code>loginButton</code> option to hook proper login event handlers to the button.</p>
-<p>The <code>logoutButton</code> option is similar to the <code>loginButton</code> one.</p>
-<p>There are three options that should be used as callback functions: <code>onConnected()</code>, <code>onLogout()</code> and <code>onNotAthorized()</code>. Those are called respectively when the user logs-in, when he logs-out and when the page is loaded by a user who has loged-into Facebook but has not yet authenticated your application.</p>
-<p>Note that the <code>onNotAuthorized()</code> callback is executed on initialization of the Connect class (pretty-much on page load), so it may be annoying to the user to prompt them to log in right away.</p>
+<p>Those options include:</p>
+<ul>
+<li><p><code>appId</code> <em>(string)</em> -- the only required option</p>
+<p>  If you do not pass that none of the functionality will get executed.</p>
+</li>
+<li><p><code>xfbml</code> <em>(boolean)</em> -- default value us <code>true</code></p>
+<p>  Simply forwarded to FBs SDK, denoting whether XFBML tags on the page
+  should be parsed.</p>
+</li>
+<li><p><code>version</code> <em>(string)</em> -- default value is 'v2.6'</p>
+<p>  Another option passed to FBs SDK. This denotes that your code would
+  expect functionality for that version of the API.</p>
+</li>
+<li><p><code>scope</code> <em>(string)</em></p>
+<p>  You should pass a string with comma delimited permissions that your
+  application needs as the <code>scope</code> option.</p>
+<p>  Note that requesting permissions is not equal to receiving them.
+  Facebook allows users to connect to your application providing
+  access to just some of the information you've asked for. So if
+  you're calling an API method that relies on special permissions
+  it is a good idea to always double-check them.</p>
+<p>  The <code>api</code> method of the class has a built-in way to double-check
+  permissions, so just pass a string of those when calling it.</p>
+<p>  Also, requesting too much permissions from the start may cause
+  users reject your application (in case they are not acquainted
+  with the option to simply disable them -- few users are).</p>
+<p>  It is advised that the original login only requires some basic
+  public profile information for the users and when you get to
+  a meaningful situation where you need the permissions for some
+  API method -- you can double check for the permissions even if
+  those were not originally present in the <code>scope</code> option. This
+  will just ask the users for additional permissions.</p>
+</li>
+<li><p><code>loginButton</code> <em>(string)</em></p>
+<p>  Pass a CSS selector for the <code>loginButton</code> option to hook proper login
+  event handlers to the button.</p>
+</li>
+<li><p><code>logoutButton</code> <em>(string)</em></p>
+<p>  Similar to the <code>loginButton</code> one.</p>
+</li>
+<li><p><code>onConnected()</code> <em>(callback)</em></p>
+</li>
+<li><p><code>onLogout()</code> <em>(callback)</em></p>
+</li>
+<li><p><code>onNotAuthorized()</code> <em>(callback)</em></p>
+</li>
+</ul>
+<p>There are three options that should be used as callback functions: <code>onConnected()</code>,
+<code>onLogout()</code> and <code>onNotAthorized()</code>. Those are called respectively when the user
+logs-in, when he logs-out and when the page is loaded by a user who has loged-into
+Facebook but has not yet authenticated your application.</p>
+<p>Note that the <code>onNotAuthorized()</code> callback is executed on initialization of the
+Connect class (pretty-much on page load), so it may be annoying to the user to
+prompt them to log in right away.</p>
 </div>
 
 
@@ -261,12 +328,169 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line344">line 344</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line456">line 456</a>
     </li></ul></dd>
     
 
     
 
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="events"><span class="type-signature"></span>events<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    <p>Object storing all event types.</p>
+<p>Each event type is an array of callback functions that get executed when an event of that type of dispatched.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="EventDispatcher.html#events">EventDispatcher#events</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_EventDispatcher.js.html">core/EventDispatcher.js</a>, <a href="core_EventDispatcher.js.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="options"><span class="type-signature"></span>options<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    <p>Initialization options</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line238">line 238</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Connect.html#defaultInitOptions">defaultInitOptions</a></li>
+        </ul>
+    </dd>
     
 
     
@@ -329,7 +553,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line24">line 24</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -397,7 +621,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line32">line 32</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -465,7 +689,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line40">line 40</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line36">line 36</a>
     </li></ul></dd>
     
 
@@ -620,7 +844,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_EventDispatcher.js.html">core/EventDispatcher.js</a>, <a href="core_EventDispatcher.js.html#line46">line 46</a>
+        <a href="core_EventDispatcher.js.html">core/EventDispatcher.js</a>, <a href="core_EventDispatcher.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -815,7 +1039,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line256">line 256</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line320">line 320</a>
     </li></ul></dd>
     
 
@@ -992,7 +1216,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_EventDispatcher.js.html">core/EventDispatcher.js</a>, <a href="core_EventDispatcher.js.html#line116">line 116</a>
+        <a href="core_EventDispatcher.js.html">core/EventDispatcher.js</a>, <a href="core_EventDispatcher.js.html#line117">line 117</a>
     </li></ul></dd>
     
 
@@ -1092,7 +1316,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line186">line 186</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line250">line 250</a>
     </li></ul></dd>
     
 
@@ -1196,7 +1420,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line211">line 211</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line275">line 275</a>
     </li></ul></dd>
     
 
@@ -1300,7 +1524,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line243">line 243</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line307">line 307</a>
     </li></ul></dd>
     
 
@@ -1359,6 +1583,16 @@ The only required option is <code>appId</code>. If you do not pass that none of 
 
 
 
+<div class="description">
+    <p>You can manually call the <code>login</code> method.</p>
+<p>If the user has not yet authorized the application they will see a popup
+asking them for permissions, according to the scope from the init options.</p>
+<p>If the user is not logged-into Facebook the popup will first ask them to
+do so and only then they will see the permissions requirements.</p>
+<p>If the user has previously logged-in this will just take a second and will
+fire the <code>login</code> event once connection is reestablished.</p>
+</div>
+
 
 
 
@@ -1400,7 +1634,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line365">line 365</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line488">line 488</a>
     </li></ul></dd>
     
 
@@ -1455,6 +1689,12 @@ The only required option is <code>appId</code>. If you do not pass that none of 
 
 
 
+<div class="description">
+    <p>You can manualy call the <code>logout</code> method.</p>
+<p>This will simply log a user out of Facebook. It will not de-authorize
+your application, restricting it from future access.</p>
+</div>
+
 
 
 
@@ -1496,7 +1736,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line381">line 381</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line509">line 509</a>
     </li></ul></dd>
     
 
@@ -1673,7 +1913,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_EventDispatcher.js.html">core/EventDispatcher.js</a>, <a href="core_EventDispatcher.js.html#line77">line 77</a>
+        <a href="core_EventDispatcher.js.html">core/EventDispatcher.js</a>, <a href="core_EventDispatcher.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -1773,7 +2013,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line199">line 199</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line263">line 263</a>
     </li></ul></dd>
     
 
@@ -1904,7 +2144,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line224">line 224</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line288">line 288</a>
     </li></ul></dd>
     
 
@@ -2031,7 +2271,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line134">line 134</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line151">line 151</a>
     </li></ul></dd>
     
 
@@ -2176,7 +2416,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line152">line 152</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line180">line 180</a>
     </li></ul></dd>
     
 
@@ -2321,7 +2561,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line116">line 116</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line119">line 119</a>
     </li></ul></dd>
     
 
@@ -2466,7 +2706,7 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line50">line 50</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -2516,6 +2756,455 @@ The only required option is <code>appId</code>. If you do not pass that none of 
     
 
     
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:login">login</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Event dispatched when the user's account is connected to the application.</p>
+<p>This is called upon successful connection of the user's profile either
+in response to them clicking on the &quot;login&quot; button or as some other direct
+call of the <code>login</code> method.</p>
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>FB API's response</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line159">line 159</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:logout">logout</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Event dispatched when the user's account is disconnected from the application.</p>
+<p>This is called upon successful disconnection of the user's profile either in
+response to them clicking on the &quot;logout&quot; button or as some other direct call
+of the <code>logout</code> method.</p>
+<p>This does not mean the user has deauthorized the application, rather that
+they are simply logged-out of Facebook.</p>
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>FB API's response</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line188">line 188</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:not_authorized">not_authorized</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Event dispatched when the user does not authorize the application.</p>
+<p>When the &quot;login&quot; button is clicked or the <code>login</code> method is called
+directly a popup is shown to the user asking for authorization of
+the application.</p>
+<p>If the user declines the application's authorization the <code>not_authorized</code>
+event will be dispatched.</p>
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Obect</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>FB API's response</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line127">line 127</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
 </article>
 
 </section>
@@ -2526,13 +3215,13 @@ The only required option is <code>appId</code>. If you do not pass that none of 
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Address.html">Address</a></li><li><a href="App.html">App</a></li><li><a href="Connect.html">Connect</a></li><li><a href="DOMCollection.html">DOMCollection</a></li><li><a href="EventDispatcher.html">EventDispatcher</a></li><li><a href="Exception.html">Exception</a></li><li><a href="TypeException.html">TypeException</a></li></ul><h3>Events</h3><ul><li><a href="App.html#event:init">init</a></li><li><a href="App.html#event:load">load</a></li></ul><h3>Namespaces</h3><ul><li><a href="core.html">core</a></li><li><a href="exceptions.html">exceptions</a></li><li><a href="fb.html">fb</a></li></ul><h3>Global</h3><ul><li><a href="global.html#define">define</a></li><li><a href="global.html#inc">inc</a></li><li><a href="global.html#pack">pack</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Address.html">Address</a></li><li><a href="App.html">App</a></li><li><a href="Connect.html">Connect</a></li><li><a href="DOMCollection.html">DOMCollection</a></li><li><a href="EventDispatcher.html">EventDispatcher</a></li><li><a href="Exception.html">Exception</a></li><li><a href="TypeException.html">TypeException</a></li></ul><h3>Events</h3><ul><li><a href="Address.html#event:change">change</a></li><li><a href="App.html#event:init">init</a></li><li><a href="App.html#event:load">load</a></li><li><a href="Connect.html#event:login">login</a></li><li><a href="Connect.html#event:logout">logout</a></li><li><a href="Connect.html#event:not_authorized">not_authorized</a></li></ul><h3>Namespaces</h3><ul><li><a href="core.html">core</a></li><li><a href="exceptions.html">exceptions</a></li><li><a href="fb.html">fb</a></li></ul><h3>Global</h3><ul><li><a href="global.html#define">define</a></li><li><a href="global.html#inc">inc</a></li><li><a href="global.html#pack">pack</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat May 28 2016 18:03:44 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat May 28 2016 20:08:55 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
