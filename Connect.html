@@ -156,7 +156,7 @@ is assigned to those.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line205">line 205</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line194">line 194</a>
     </li></ul></dd>
     
 
@@ -236,11 +236,11 @@ is assigned to those.</p>
 <p>  Simply forwarded to FBs SDK, denoting whether XFBML tags on the page
   should be parsed.</p>
 </li>
-<li><p><code>version</code> <em>(string)</em> -- default value is 'v2.6'</p>
+<li><p><code>version</code> <em>(string)</em> -- default value is <code>'v2.6'</code></p>
 <p>  Another option passed to FBs SDK. This denotes that your code would
   expect functionality for that version of the API.</p>
 </li>
-<li><p><code>scope</code> <em>(string)</em></p>
+<li><p><code>scope</code> <em>(string)</em> -- default value is 'public_profile,email'</p>
 <p>  You should pass a string with comma delimited permissions that your
   application needs as the <code>scope</code> option.</p>
 <p>  Note that requesting permissions is not equal to receiving them.
@@ -260,12 +260,33 @@ is assigned to those.</p>
   those were not originally present in the <code>scope</code> option. This
   will just ask the users for additional permissions.</p>
 </li>
-<li><p><code>loginButton</code> <em>(string)</em></p>
+<li><p><code>loginButton</code> <em>(string)</em> -- default value is <code>'.login'</code></p>
 <p>  Pass a CSS selector for the <code>loginButton</code> option to hook proper login
   event handlers to the button.</p>
 </li>
-<li><p><code>logoutButton</code> <em>(string)</em></p>
+<li><p><code>logoutButton</code> <em>(string)</em> -- default value is <code>'.logout'</code></p>
 <p>  Similar to the <code>loginButton</code> one.</p>
+</li>
+<li><p><code>locale</code> <em>(string)</em> -- default value is <code>'en_US'</code></p>
+<p>  This is used when building the URL for the FB SDK to load.</p>
+<p>  The SDK is available as multiple languages at different
+  URLs, so you need to load the proper one in order for
+  your application to be localized.</p>
+<p>  You can pass a locale here as '<code>{language_code}_{country_code}</code>'
+  where <code>{language_code}</code> is a two-lowercase representation
+  of the language (for example 'en' or 'pt') and
+  <code>{country_code}</code> is a two-lowercase representation of the
+  country (for example 'US' or 'GB' in case for English
+  and 'BR' or 'PT' for Portuguese).</p>
+</li>
+<li><p><code>userBodyClass</code> <em>(string)</em> -- default value is <code>'user'</code></p>
+<p>  This class is assigned to the body tag after successful
+  connection to the user's account is established.</p>
+</li>
+<li><p><code>guestBodyClass</code> <em>(string)</em> -- default value is <code>'guest'</code></p>
+<p>  This class is assigned to the body tag if a user logs
+  out of FB when on the site or if they do not authorize
+  the application.</p>
 </li>
 <li><p><code>onConnected()</code> <em>(callback)</em></p>
 </li>
@@ -328,7 +349,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line456">line 456</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line471">line 471</a>
     </li></ul></dd>
     
 
@@ -478,7 +499,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line238">line 238</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line227">line 227</a>
     </li></ul></dd>
     
 
@@ -1039,7 +1060,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line320">line 320</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line309">line 309</a>
     </li></ul></dd>
     
 
@@ -1316,7 +1337,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line250">line 250</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line239">line 239</a>
     </li></ul></dd>
     
 
@@ -1420,7 +1441,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line275">line 275</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line264">line 264</a>
     </li></ul></dd>
     
 
@@ -1524,7 +1545,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line307">line 307</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line296">line 296</a>
     </li></ul></dd>
     
 
@@ -1634,7 +1655,7 @@ fire the <code>login</code> event once connection is reestablished.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line488">line 488</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line505">line 505</a>
     </li></ul></dd>
     
 
@@ -1736,7 +1757,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line509">line 509</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line526">line 526</a>
     </li></ul></dd>
     
 
@@ -2013,7 +2034,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line263">line 263</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line252">line 252</a>
     </li></ul></dd>
     
 
@@ -2144,7 +2165,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line288">line 288</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line277">line 277</a>
     </li></ul></dd>
     
 
@@ -2271,7 +2292,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line151">line 151</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line140">line 140</a>
     </li></ul></dd>
     
 
@@ -2416,7 +2437,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line180">line 180</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line169">line 169</a>
     </li></ul></dd>
     
 
@@ -2561,7 +2582,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line119">line 119</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line108">line 108</a>
     </li></ul></dd>
     
 
@@ -2879,7 +2900,7 @@ call of the <code>login</code> method.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line159">line 159</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line148">line 148</a>
     </li></ul></dd>
     
 
@@ -3028,7 +3049,7 @@ they are simply logged-out of Facebook.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line188">line 188</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line177">line 177</a>
     </li></ul></dd>
     
 
@@ -3177,7 +3198,7 @@ event will be dispatched.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line127">line 127</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line116">line 116</a>
     </li></ul></dd>
     
 
@@ -3221,7 +3242,7 @@ event will be dispatched.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat May 28 2016 20:08:55 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 29 2016 15:27:24 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
