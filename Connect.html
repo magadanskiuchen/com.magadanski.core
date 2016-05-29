@@ -52,13 +52,9 @@
 <p>After the FB SDK is loaded and the DOMContentLoaded event fires the
 <code>init</code> method of the class. This method initializes the FB SDK, checks
 the current user's status (<code>connected</code>, <code>not_authorized</code> or <code>uknown</code>).</p>
-<p>Based on this status either the <code>login</code> or <code>logout</code> events are dispatched.
-The <code>login</code> event is dispatched if the status is <code>connected</code> and the
-<code>logout</code> one if one of the other two statuses is present.</p>
-<p>If the status of the user changes associated events are dispatched as well.
-The difference is that in such a follow-up status change if the user is now
-<code>not_authorized</code> then a <code>not_authorized</code> event will be dispatched, rather
-than the original <code>logout</code> one.</p>
+<p>Based on this status a corresponding event of <code>login</code>, <code>not_authorized</code>
+or <code>logout</code> is dispatched.</p>
+<p>If the status of the user changes then associated events are dispatched as well.</p>
 <p>Based on options set for &quot;login&quot; and &quot;logout&quot; buttons necessary functionality
 is assigned to those.</p>
 </div>
@@ -349,7 +345,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line471">line 471</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line467">line 467</a>
     </li></ul></dd>
     
 
@@ -499,7 +495,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line227">line 227</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line223">line 223</a>
     </li></ul></dd>
     
 
@@ -1060,7 +1056,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line309">line 309</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line305">line 305</a>
     </li></ul></dd>
     
 
@@ -1337,7 +1333,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line239">line 239</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line235">line 235</a>
     </li></ul></dd>
     
 
@@ -1441,7 +1437,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line264">line 264</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line260">line 260</a>
     </li></ul></dd>
     
 
@@ -1545,7 +1541,7 @@ prompt them to log in right away.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line296">line 296</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line292">line 292</a>
     </li></ul></dd>
     
 
@@ -1655,7 +1651,7 @@ fire the <code>login</code> event once connection is reestablished.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line505">line 505</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line501">line 501</a>
     </li></ul></dd>
     
 
@@ -1757,7 +1753,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line526">line 526</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line522">line 522</a>
     </li></ul></dd>
     
 
@@ -2034,7 +2030,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line252">line 252</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line248">line 248</a>
     </li></ul></dd>
     
 
@@ -2165,7 +2161,7 @@ your application, restricting it from future access.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line277">line 277</a>
+        <a href="fb_Connect.js.html">fb/Connect.js</a>, <a href="fb_Connect.js.html#line273">line 273</a>
     </li></ul></dd>
     
 
@@ -3242,7 +3238,7 @@ event will be dispatched.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 29 2016 15:27:24 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 29 2016 15:35:15 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>
